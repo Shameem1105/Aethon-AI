@@ -1,0 +1,76 @@
+[
+  {
+    "question_type": "mcq",
+    "question_title": "Basic JavaScript",
+    "question_text": "Which company developed JavaScript?",
+    "option_a": "Netscape",
+    "option_b": "Microsoft",
+    "option_c": "Sun Microsystems",
+    "option_d": "Oracle",
+    "correct_answer": "Netscape",
+    "difficulty": "Easy",
+    "marks": 2
+  },
+  {
+    "question_type": "mcq",
+    "question_title": "React State",
+    "question_text": "What hook is used to manage state in functional components?",
+    "option_a": "useEffect",
+    "option_b": "useState",
+    "option_c": "useReducer",
+    "option_d": "useMemo",
+    "correct_answer": "useState",
+    "difficulty": "Easy",
+    "marks": 2
+  },
+  {
+    "question_type": "mcq",
+    "question_title": "CSS Display",
+    "question_text": "Which CSS property is used to make a responsive grid layout?",
+    "option_a": "display: flex",
+    "option_b": "display: grid",
+    "option_c": "display: block",
+    "option_d": "display: inline",
+    "correct_answer": "display: grid",
+    "difficulty": "Medium",
+    "marks": 2
+  },
+  {
+    "question_type": "mcq",
+    "question_title": "SQL Databases",
+    "question_text": "Which of the following is NOT a NoSQL database?",
+    "option_a": "MongoDB",
+    "option_b": "Cassandra",
+    "option_c": "PostgreSQL",
+    "option_d": "CouchDB",
+    "correct_answer": "PostgreSQL",
+    "difficulty": "Medium",
+    "marks": 2
+  },
+  {
+    "question_type": "mcq",
+    "question_title": "HTTP Methods",
+    "question_text": "Which HTTP method is idempotent and usually used to update a resource?",
+    "option_a": "POST",
+    "option_b": "PUT",
+    "option_c": "DELETE",
+    "option_d": "PATCH",
+    "correct_answer": "PUT",
+    "difficulty": "Hard",
+    "marks": 2
+  },
+  {
+    "question_type": "coding",
+    "question_title": "Multiply Array Elements",
+    "question_text": "Write a program that takes a comma-separated list of integers and multiplies each element by 2. Print the resulting array.",
+    "difficulty": "Medium",
+    "marks": 10,
+    "coding_input": "A comma-separated string of numbers (e.g., '1,2,3').",
+    "coding_output": "The transformed comma-separated string.",
+    "sample_testcase": "Input: 1,2,3\nOutput: 2,4,6",
+    "visible_testcases": [
+      {"input": "1,2,3", "expected": "2,4,6"},
+      {"input": "10,-5,0", "expected": "20,-10,0"}
+    ]
+  }
+]

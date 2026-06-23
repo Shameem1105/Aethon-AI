@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Feedback</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #10b981;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .back-btn {
+      color: var(--text-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .back-btn:hover {
+      color: var(--text);
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 120px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      color: #e2e8f0;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+
+    .card-header i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+
+    .icon-blue { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+    .icon-purple { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+    .icon-green { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+    .icon-orange { background: rgba(249, 115, 22, 0.2); color: #fb923c; }
+
+    .card-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stars {
+      display: flex;
+      gap: 0.25rem;
+      color: #fbbf24;
+      font-size: 1.5rem;
+    }
+
+    .stars i.empty {
+      color: #334155;
+    }
+
+    .score-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+
+    .badge {
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .badge-green { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
+    .badge-blue { background: rgba(59, 130, 246, 0.1); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.2); }
+    .badge-orange { background: rgba(249, 115, 22, 0.1); color: #f97316; border: 1px solid rgba(249, 115, 22, 0.2); }
+
+    .loading {
+      text-align: center;
+      padding: 4rem;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+      .card-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <a href="assessment.html" class="back-btn">
+      <i class="ri-arrow-left-line"></i> Back
+    </a>
+    <h1>Review Feedback</h1>
+  </div>
+
+  <div id="loading" class="loading">Loading feedback data...</div>
+  
+  <div id="content" class="grid-container" style="display: none;">
+    
+    <!-- Left Column (Ratings) -->
+    <div class="col">
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-header">
+          <i class="ri-star-line icon-blue"></i> Overall Assessment Rating
+        </div>
+        <div class="card-content">
+          <div class="stars" id="stars-overall"></div>
+          <div class="score-text"><span id="val-overall"></span>/5</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-header">
+          <i class="ri-bar-chart-line icon-purple"></i> Assessment Difficulty
+        </div>
+        <div class="card-content">
+          <div class="stars" id="stars-diff"></div>
+          <div class="score-text"><span id="val-diff"></span>/5</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-header">
+          <i class="ri-lightbulb-line icon-green"></i> Question Clarity
+        </div>
+        <div class="card-content">
+          <div class="stars" id="stars-clarity"></div>
+          <div class="score-text"><span id="val-clarity"></span>/5</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <i class="ri-macbook-line icon-blue"></i> Platform Experience
+        </div>
+        <div class="card-content">
+          <div class="stars" id="stars-exp"></div>
+          <div class="score-text"><span id="val-exp"></span>/5</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column (Text/Selects) -->
+    <div class="col">
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-header">
+          <i class="ri-thumb-up-line icon-green"></i> Recommendation
+        </div>
+        <div class="card-content">
+          <div class="badge badge-green" id="val-rec">Definitely</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-header">
+          <i class="ri-file-list-3-line icon-blue"></i> Preferred Assessment Type
+        </div>
+        <div class="card-content">
+          <div class="badge badge-blue" id="val-pref">No Preference</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <i class="ri-error-warning-line icon-orange"></i> Platform Issues
+        </div>
+        <div class="card-content">
+          <div class="badge badge-orange" id="val-iss">None</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function generateStars(rating) {
+      let html = '';
+      for(let i=1; i<=5; i++) {
+        if (i <= rating) {
+          html += '<i class="ri-star-fill"></i>';
+        } else {
+          html += '<i class="ri-star-fill empty"></i>';
+        }
+      }
+      return html;
+    }
+
+    async function loadFeedback() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const assessmentId = urlParams.get('id');
+      const studentEmail = localStorage.getItem('userEmail');
+
+      if (!assessmentId || !studentEmail) {
+        document.getElementById('loading').innerText = "Missing parameters.";
+        return;
+      }
+
+      try {
+        const res = await fetch(`http://localhost:3000/feedback/${assessmentId}/${studentEmail}`);
+        const data = await res.json();
+
+        if (!data) {
+          document.getElementById('loading').innerText = "Feedback not found.";
+          return;
+        }
+
+        // Ratings
+        document.getElementById('val-overall').innerText = data.overall_rating;
+        document.getElementById('stars-overall').innerHTML = generateStars(data.overall_rating);
+
+        document.getElementById('val-diff').innerText = data.difficulty_rating;
+        document.getElementById('stars-diff').innerHTML = generateStars(data.difficulty_rating);
+
+        document.getElementById('val-clarity').innerText = data.clarity_rating;
+        document.getElementById('stars-clarity').innerHTML = generateStars(data.clarity_rating);
+
+        document.getElementById('val-exp').innerText = data.platform_experience;
+        document.getElementById('stars-exp').innerHTML = generateStars(data.platform_experience);
+
+        // Text
+        document.getElementById('val-rec').innerText = data.recommendation;
+        document.getElementById('val-pref').innerText = data.preferred_type;
+        document.getElementById('val-iss').innerText = data.platform_issues;
+
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('content').style.display = 'grid';
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById('loading').innerText = "Error loading feedback.";
+      }
+    }
+
+    loadFeedback();
+  </script>
+</body>
+</html>

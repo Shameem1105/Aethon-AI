@@ -1,0 +1,243 @@
+<!-- test-admin.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Quick Admin Test</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Segoe UI,sans-serif;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+
+  background:
+  radial-gradient(circle at top left,#2e1065,transparent 35%),
+  radial-gradient(circle at bottom right,#1e1b4b,transparent 35%),
+  #05010a;
+
+  color:#fff;
+}
+
+.box{
+  width:460px;
+  max-width:100%;
+  padding:30px;
+  border-radius:20px;
+
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+h1{
+  text-align:center;
+  margin-bottom:22px;
+}
+
+input,textarea,select{
+  width:100%;
+  height:46px;
+  margin-bottom:12px;
+  border:none;
+  outline:none;
+  border-radius:12px;
+  padding:0 14px;
+
+  background:rgba(255,255,255,.07);
+  color:#fff;
+}
+
+textarea{
+  height:90px;
+  padding-top:12px;
+  resize:none;
+}
+
+button{
+  width:100%;
+  height:48px;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+  font-weight:700;
+  color:#fff;
+  margin-bottom:12px;
+
+  background:linear-gradient(135deg,#4f46e5,#7c3aed);
+}
+
+.msg{
+  text-align:center;
+  min-height:22px;
+  color:#22c55e;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>Quick Test Panel</h1>
+
+<input id="title" placeholder="Test Title">
+<input id="date" type="date">
+<textarea id="description" placeholder="Description"></textarea>
+<input id="time" type="number" placeholder="Total Time">
+
+<button onclick="createTest()">
+Create Test
+</button>
+
+<hr style="margin:15px 0;border-color:#333;">
+
+<input id="section" placeholder="Section Name">
+<input id="question" placeholder="Question">
+<input id="a" placeholder="Option A">
+<input id="b" placeholder="Option B">
+<input id="c" placeholder="Option C">
+<input id="d" placeholder="Option D">
+<input id="answer" placeholder="Correct Answer">
+<input id="marks" type="number" placeholder="Marks">
+
+<select id="difficulty">
+<option>Easy</option>
+<option>Medium</option>
+<option>Hard</option>
+</select>
+
+<button onclick="saveQuestion()">
+Save Question
+</button>
+
+<div class="msg" id="msg"></div>
+
+</div>
+
+<script>
+
+let currentTestId = null;
+
+async function createTest(){
+
+const title =
+document.getElementById("title").value;
+
+const date =
+document.getElementById("date").value;
+
+const description =
+document.getElementById("description").value;
+
+const time =
+document.getElementById("time").value;
+
+const res = await fetch("/create-test",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+title,
+date,
+description,
+total_time:time
+})
+});
+
+const data = await res.json();
+
+if(data.success){
+
+currentTestId = data.testId;
+
+msg.innerText =
+"Test Created ID: "+data.testId;
+
+}else{
+
+msg.innerText =
+"Create Failed";
+
+}
+
+}
+
+async function saveQuestion(){
+
+if(!currentTestId){
+msg.innerText =
+"Create Test First";
+return;
+}
+
+const res = await fetch("/save-question",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+
+assessment_id:currentTestId,
+section_name:
+document.getElementById("section").value,
+
+question_type:"mcq",
+
+question_text:
+document.getElementById("question").value,
+
+option_a:
+document.getElementById("a").value,
+
+option_b:
+document.getElementById("b").value,
+
+option_c:
+document.getElementById("c").value,
+
+option_d:
+document.getElementById("d").value,
+
+correct_answer:
+document.getElementById("answer").value,
+
+difficulty:
+document.getElementById("difficulty").value,
+
+marks:
+document.getElementById("marks").value
+
+})
+});
+
+const data = await res.json();
+
+if(data.success){
+
+msg.innerText =
+"Question Saved";
+
+}else{
+
+msg.innerText =
+"Save Failed";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

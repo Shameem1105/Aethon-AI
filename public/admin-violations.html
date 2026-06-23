@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aethon Admin - Security Violations</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <i class="ri-flashlight-line logo-icon"></i>
+      <span class="logo-text">Aethon Admin</span>
+    </div>
+    
+    <nav class="sidebar-menu">
+      <a href="admin.html" class="menu-item">
+        <i class="ri-dashboard-line"></i> Overview
+      </a>
+      <a href="admin-students.html" class="menu-item">
+        <i class="ri-group-line"></i> Students
+      </a>
+      <a href="admin-assessments.html" class="menu-item">
+        <i class="ri-shield-line"></i> Assessments
+      </a>
+      <a href="admin-monitoring.html" class="menu-item">
+        <i class="ri-computer-line"></i> Monitoring
+      </a>
+      <a href="admin-violations.html" class="menu-item active">
+        <i class="ri-error-warning-line"></i> Violations
+      </a>
+      
+      <span class="menu-label">System</span>
+      
+      <a href="admin-settings.html" class="menu-item">
+        <i class="ri-settings-4-line"></i> Settings
+      </a>
+    </nav>
+    
+    <div class="sidebar-profile">
+      <!-- Injected by admin-common.js -->
+    </div>
+  </aside>
+
+  <!-- MAIN VIEWPORT -->
+  <div class="main-content">
+    
+    <!-- TOP HEADER -->
+    <header class="top-header">
+      <div class="breadcrumb">
+        <span>Global Environment</span>
+        <i class="ri-arrow-right-s-line"></i>
+        <span class="env-name">Production</span>
+      </div>
+      
+      <div class="header-actions">
+        <div class="pill-toggle">
+          <a href="dashboard.html" class="toggle-btn">Student View</a>
+          <a href="assessment.html" class="toggle-btn">Assessment IDE</a>
+        </div>
+        
+        <div class="header-search">
+          <i class="ri-search-line"></i>
+          <input type="text" placeholder="Search logs, metrics...">
+        </div>
+        
+        <button class="bell-btn">
+          <i class="ri-notification-3-line"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- CONTENT CONTAINER -->
+    <div class="page-container">
+      
+      <div class="page-title-block">
+        <h1 class="page-title">Security Violations</h1>
+        <p class="page-subtitle">Review AI-flagged suspicious behavior and proctoring alerts.</p>
+      </div>
+
+      <!-- STATUS SUMMARY CARDS -->
+      <div class="metrics-row">
+        <div class="metric-card">
+          <div class="metric-header">
+            <span>Critical Alerts</span>
+            <i class="ri-error-warning-fill" style="color: var(--danger);"></i>
+          </div>
+          <div class="metric-value" style="color: var(--danger);" id="critical-alert-count">12</div>
+          <div class="metric-footer">
+            <span>Immediate review suggested</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span>Unresolved Flags</span>
+            <i class="ri-alarm-warning-line" style="color: var(--warning);"></i>
+          </div>
+          <div class="metric-value" style="color: var(--warning);" id="unresolved-alert-count">45</div>
+          <div class="metric-footer">
+            <span>Awaiting administrator feedback</span>
+          </div>
+        </div>
+
+        <div class="metric-card" style="grid-column: span 2;">
+          <div class="metric-header">
+            <span>Auto-Resolved Flags</span>
+            <i class="ri-checkbox-circle-line" style="color: var(--success);"></i>
+          </div>
+          <div class="metric-value" style="color: var(--success);">892</div>
+          <div class="metric-footer">
+            <span>Anomalies auto-cleared by policy rules</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIOLATIONS TABLE PANEL -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <div class="header-search" style="margin-left: 0;">
+            <i class="ri-search-line"></i>
+            <input type="text" id="violations-search-input" placeholder="Search violations..." oninput="searchViolations()">
+          </div>
+          
+          <div class="actions-row">
+            <button class="btn-outline" onclick="alert('Filtering tools coming soon!')">
+              <i class="ri-filter-3-line"></i> Filter Alerts
+            </button>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="custom-table" id="violations-table">
+            <thead>
+              <tr>
+                <th>Incident ID</th>
+                <th>Violation Type</th>
+                <th>Severity</th>
+                <th>Student / Exam</th>
+                <th>Time</th>
+                <th style="text-align: right;">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dynamic rows populated by admin-violations.js -->
+              <tr>
+                <td colspan="6" style="text-align: center; color: var(--gray-text); padding: 40px 0;">Loading proctoring incident records...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- VIOLATION REVIEW MODAL -->
+  <div class="modal-overlay" id="review-modal">
+    <div class="modal-card" style="width: 600px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Investigate Incident <span id="review-modal-title-id" style="font-family: 'JetBrains Mono', monospace; font-size: 16px; color: var(--primary-hover);"></span></h3>
+        <button class="modal-close" onclick="closeReviewModal()">&times;</button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+        <div class="form-group">
+          <label>Student Email ID</label>
+          <div id="review-email" style="font-size: 14px; font-weight: 500;"></div>
+        </div>
+        <div class="form-group">
+          <label>Registered Name</label>
+          <div id="review-name" style="font-size: 14px; font-weight: 500;"></div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+        <div class="form-group">
+          <label>Violation Triggered</label>
+          <div id="review-type" style="font-size: 14px; font-weight: 600; color: var(--warning);"></div>
+        </div>
+        <div class="form-group">
+          <label>Flag Severity</label>
+          <div id="review-severity" style="font-size: 14px; font-weight: 700;"></div>
+        </div>
+      </div>
+
+      <!-- VIDEO LOG CONTAINER -->
+      <div class="form-group">
+        <label>Webcam Recording Capture</label>
+        <div id="video-wrapper" style="margin-top: 8px;">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+
+      <div class="modal-footer" style="margin-top: 24px;">
+        <button class="btn-outline" style="border-color: var(--danger); color: var(--danger);" onclick="resolveViolation('Disciplinary Action')">Suspend Account</button>
+        <button class="btn-outline" onclick="resolveViolation('Dismissed')">Dismiss Warning</button>
+        <button class="btn-primary" onclick="resolveViolation('Resolved')">Mark Resolved</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/admin-common.js"></script>
+  <script src="js/admin-violations.js"></script>
+</body>
+</html>

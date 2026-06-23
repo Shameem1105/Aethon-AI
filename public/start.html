@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start Assessment</title>
+
+<link rel="stylesheet" href="css/start.css">
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- 🔥 MAIN BIG CARD -->
+  <div class="main-card">
+
+    <!-- HEADER -->
+    <div class="header">
+      <h1 id="title">Loading...</h1>
+      <p>Assessment created via admin panel</p>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="container">
+
+      <!-- INSTRUCTIONS -->
+      <div class="card instructions">
+        <h3>Assessment Instructions</h3>
+        <ul>
+          <li>Use a stable internet connection.</li>
+          <li>Do not switch tabs or minimize your browser.</li>
+          <li>Automatic submission after 3 tab switches.</li>
+          <li>Automatic submission when the time ends.</li>
+          <li>All questions are mandatory.</li>
+          <li>You can flag questions for review.</li>
+          <li>Keep your device charged or plugged in during the assessment.</li>
+          <li>Ensure webcam and microphone (if required) are working before starting.</li>
+          <li>Do not refresh or close your browser during the test.</li>
+          <li>Allow necessary browser permissions (camera, microphone, screen recording) if required.</li>
+          <li>Read all questions carefully before answering.</li>
+          <li>Click Submit after finishing your assessment.</li>
+        </ul>
+      </div>
+
+      <!-- MONITORING -->
+      <div class="card monitor-card">
+        <h3>Monitoring & Integrity</h3>
+
+        <div class="monitor-grid" id="featuresContainer">
+          <!-- JS WILL INSERT FEATURES -->
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- START BUTTON -->
+    <button id="startBtn" class="start-btn">
+      Start Assessment →
+    </button>
+    <!-- BOTTOM STATS -->
+    <div class="bottom-bar">
+
+      <div class="stat">
+        <i class="ri-time-line"></i>
+        <small>Duration</small>
+        <h2 id="duration">--</h2>
+      </div>
+
+      <div class="stat">
+        <i class="ri-question-line"></i>
+        <small>Questions</small>
+        <h2 id="questions">--</h2>
+      </div>
+
+      <div class="stat">
+        <i class="ri-trophy-line"></i>
+        <small>Total Marks</small>
+        <h2 id="marks">--</h2>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script src="js/start.js"></script>
+
+</body>
+</html>
+

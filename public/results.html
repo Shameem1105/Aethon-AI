@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assessment Results</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-light: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #6366f1;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding: 2rem; }
+    .container { max-width: 800px; margin: 0 auto; }
+    
+    .back-btn {
+      color: var(--text-muted); text-decoration: none; display: inline-flex;
+      align-items: center; gap: 0.5rem; margin-bottom: 2rem; transition: color 0.2s;
+    }
+    .back-btn:hover { color: var(--text); }
+
+    .header-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 1rem; padding: 2rem; margin-bottom: 2rem;
+      text-align: center;
+    }
+    .header-card h1 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #3b82f6; }
+    .header-card p { color: var(--text-muted); font-size: 0.9rem; }
+
+    .lb-table {
+      width: 100%; border-collapse: collapse; background: var(--surface);
+      border-radius: 1rem; overflow: hidden;
+    }
+    .lb-table th, .lb-table td {
+      padding: 1rem 1.5rem; text-align: left; border-bottom: 1px solid var(--border);
+    }
+    .lb-table th { color: var(--text-muted); font-weight: 500; font-size: 0.9rem; background: var(--surface-light); }
+    .lb-table tr:last-child td { border-bottom: none; }
+    
+    .rank-badge {
+      width: 30px; height: 30px; border-radius: 50%; background: var(--surface-light);
+      display: flex; align-items: center; justify-content: center; font-weight: bold;
+    }
+    .rank-1 { background: #fbbf24; color: #78350f; }
+    .rank-2 { background: #cbd5e1; color: #334155; }
+    .rank-3 { background: #d97706; color: #78350f; }
+
+    .loading { text-align: center; padding: 4rem; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <a href="javascript:history.back()" class="back-btn">
+      <i class="ri-arrow-left-line"></i> Back
+    </a>
+
+    <div id="loading" class="loading">Loading results...</div>
+
+    <div id="results-content" style="display: none;">
+      
+      <div class="header-card">
+        <h1><i class="ri-trophy-line"></i> <span id="r-title">Assessment</span></h1>
+        <p>Results for <span id="r-date"></span> (Duration: <span id="r-duration"></span> mins)</p>
+      </div>
+
+      <table class="lb-table">
+        <thead>
+          <tr>
+            <th width="80">Rank</th>
+            <th>Student</th>
+            <th>Marks</th>
+          </tr>
+        </thead>
+        <tbody id="lb-body"></tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <script>
+    async function loadResults() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const assessmentId = urlParams.get('id');
+      const studentEmail = localStorage.getItem('userEmail') || 'admin';
+
+      if (!assessmentId) {
+        document.getElementById('loading').innerText = "Missing assessment ID.";
+        return;
+      }
+
+      try {
+        const res = await fetch(`http://localhost:3000/results/analytics/${assessmentId}/${studentEmail}`);
+        const data = await res.json();
+
+        if (data.error) {
+          document.getElementById('loading').innerText = "Results not found.";
+          return;
+        }
+
+        document.getElementById('r-title').innerText = data.assessment.title;
+        document.getElementById('r-date').innerText = new Date(data.assessment.start_time).toLocaleDateString();
+        document.getElementById('r-duration').innerText = data.assessment.duration;
+
+        let lbHtml = '';
+        if (data.leaderboard.length === 0) {
+          lbHtml = '<tr><td colspan="3" style="text-align:center; padding:2rem; color:#94a3b8;">No students have submitted yet.</td></tr>';
+        } else {
+          data.leaderboard.forEach((lb, i) => {
+            let rankClass = `rank-${i+1}`;
+            let rankUi = i < 3 ? `<div class="rank-badge ${rankClass}">${i+1}</div>` : `<div class="rank-badge">${i+1}</div>`;
+            lbHtml += `
+              <tr>
+                <td>${rankUi}</td>
+                <td style="font-weight:500;">${lb.student_email}</td>
+                <td><span style="font-size:1.2rem;font-weight:bold;color:#10b981;">${lb.score}</span></td>
+              </tr>
+            `;
+          });
+        }
+        document.getElementById('lb-body').innerHTML = lbHtml;
+
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('results-content').style.display = 'block';
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById('loading').innerText = "Error loading results.";
+      }
+    }
+
+    loadResults();
+  </script>
+</body>
+</html>

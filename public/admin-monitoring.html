@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aethon Admin - Live Monitoring</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <i class="ri-flashlight-line logo-icon"></i>
+      <span class="logo-text">Aethon Admin</span>
+    </div>
+    
+    <nav class="sidebar-menu">
+      <a href="admin.html" class="menu-item">
+        <i class="ri-dashboard-line"></i> Overview
+      </a>
+      <a href="admin-students.html" class="menu-item">
+        <i class="ri-group-line"></i> Students
+      </a>
+      <a href="admin-assessments.html" class="menu-item">
+        <i class="ri-shield-line"></i> Assessments
+      </a>
+      <a href="admin-monitoring.html" class="menu-item active">
+        <i class="ri-computer-line"></i> Monitoring
+      </a>
+      <a href="admin-violations.html" class="menu-item">
+        <i class="ri-error-warning-line"></i> Violations
+      </a>
+      
+      <span class="menu-label">System</span>
+      
+      <a href="admin-settings.html" class="menu-item">
+        <i class="ri-settings-4-line"></i> Settings
+      </a>
+    </nav>
+    
+    <div class="sidebar-profile">
+      <!-- Injected by admin-common.js -->
+    </div>
+  </aside>
+
+  <!-- MAIN VIEWPORT -->
+  <div class="main-content">
+    
+    <!-- TOP HEADER -->
+    <header class="top-header">
+      <div class="breadcrumb">
+        <span>Global Environment</span>
+        <i class="ri-arrow-right-s-line"></i>
+        <span class="env-name">Production</span>
+      </div>
+      
+      <div class="header-actions">
+        <div class="pill-toggle">
+          <a href="dashboard.html" class="toggle-btn">Student View</a>
+          <a href="assessment.html" class="toggle-btn">Assessment IDE</a>
+        </div>
+        
+        <div class="header-search">
+          <i class="ri-search-line"></i>
+          <input type="text" placeholder="Search logs, metrics...">
+        </div>
+        
+        <button class="bell-btn">
+          <i class="ri-notification-3-line"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- CONTENT CONTAINER -->
+    <div class="page-container">
+      
+      <div class="page-title-block">
+        <h1 class="page-title">Live Monitoring</h1>
+        <p class="page-subtitle">Real-time proctoring grid for active assessments.</p>
+      </div>
+
+      <!-- FILTER AND BADGE HEADER BAR -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+        <div class="live-badge-row">
+          <span class="badge active" style="font-size: 13px; padding: 6px 12px;">
+            <span style="display: inline-block; width: 8px; height: 8px; background-color: var(--success); border-radius: 50%; margin-right: 6px; animation: flash 1s infinite alternate;"></span>
+            124 Active
+          </span>
+          <span class="badge flagged" style="font-size: 13px; padding: 6px 12px;">
+            <i class="ri-error-warning-line" style="margin-right: 4px;"></i>
+            3 Flagged
+          </span>
+        </div>
+
+        <button class="btn-outline" id="autofocus-btn" onclick="toggleAutoFocus()">
+          <i class="ri-focus-3-line"></i> AI Auto-Focus
+        </button>
+      </div>
+
+      <!-- ACTIVE STUDENT GRID -->
+      <div class="monitoring-grid" id="monitoring-grid">
+        <!-- Rendered by admin-monitoring.js -->
+        <div style="text-align: center; color: var(--gray-text); padding: 80px 0; grid-column: 1 / -1;">Initializing live stream connections...</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/admin-common.js"></script>
+  <script src="js/admin-monitoring.js"></script>
+</body>
+</html>

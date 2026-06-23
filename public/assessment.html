@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Assessment Dashboard</title>
+
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/assessment.css">
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+  >
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+<div class="sidebar" id="sidebar">
+
+  <div class="top">
+
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="ri-book-open-line"></i>
+      </div>
+      <span class="logo-text">AETHON</span>
+    </div>
+
+    <div class="toggle-btn" onclick="toggleSidebar()">
+      <i class="ri-arrow-left-s-line"></i>
+    </div>
+
+  </div>
+
+<div class="menu">
+
+  <button class="menu-item"
+    onclick="window.location.href='dashboard.html'">
+    <i class="ri-layout-grid-line"></i>
+    <span>Dashboard</span>
+  </button>
+
+  <button class="menu-item active"
+    onclick="window.location.href='assessment.html'">
+    <i class="ri-pencil-line"></i>
+    <span>Assessments</span>
+  </button>
+
+  <button class="menu-item"
+    onclick="window.location.href='coding.html'">
+    <i class="ri-code-s-slash-line"></i>
+    <span>Coding Practice</span>
+  </button>
+
+  <button class="menu-item"
+    onclick="window.location.href='profile.html'">
+    <i class="ri-user-fill"></i>
+    <span>Profile</span>
+  </button>
+
+</div>
+
+<div class="profile">
+
+  <div class="profile-left">
+
+    <!-- Avatar -->
+    <div class="avatar" id="userAvatar"></div>
+
+    <!-- Name + Role -->
+    <div class="profile-text">
+      <p class="name" id="userName"></p>
+      <span class="role" id="userRole"></span>
+    </div>
+
+  </div>
+
+  <i class="ri-logout-box-r-line logout"
+     onclick="logout()"
+     style="cursor:pointer;"></i>
+
+</div>
+</div>
+
+<!-- ================= MAIN ================= -->
+<div class="main">
+
+  <!-- HEADER -->
+  <div class="header">
+
+    <div>
+      <span class="badge">ASSESSMENTS</span>
+
+      <h1>Assessment Dashboard</h1>
+
+      <p>
+        Track and manage your academic assessments
+      </p>
+    </div>
+
+    <input
+      type="text"
+      class="search"
+      placeholder="Search assessments..."
+    >
+
+  </div>
+
+  <!-- FILTER -->
+  <div class="filters">
+
+    <button class="active">All</button>
+    <button>Available</button>
+    <button>Completed</button>
+    <button>Missed</button>
+    <button>Feedback</button>
+
+  </div>
+
+  <!-- SORT -->
+  <div class="sort">
+
+    <button class="active">
+      Due Date
+    </button>
+
+    <button>
+      Title
+    </button>
+
+    <button>
+      Order: A-Z ↑
+    </button>
+
+  </div>
+
+  <!-- CARDS -->
+  <div
+    class="assessment-cards"
+    id="assessmentContainer">
+  </div>
+
+</div>
+
+<!-- ================= DETAILS POPUP ================= -->
+<div
+  id="detailsModal"
+  class="details-modal">
+
+  <div class="details-popup">
+
+    <span
+      id="closeModal">
+      &times;
+    </span>
+
+    <div id="modalBody"></div>
+
+  </div>
+
+</div>
+
+<!-- ================= JS ================= -->
+<script src="js/nav.js"></script>
+<script src="js/assessment.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collect Feedback</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --primary: #10b981;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .container {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .header h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(to right, #34d399, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border);
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .form-group label i {
+      color: var(--primary);
+    }
+
+    .star-rating {
+      display: flex;
+      gap: 0.5rem;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+    }
+
+    .star-rating input {
+      display: none;
+    }
+
+    .star-rating label {
+      cursor: pointer;
+      font-size: 2rem;
+      color: #334155;
+      transition: color 0.2s;
+      margin: 0;
+    }
+
+    .star-rating input:checked ~ label,
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+      color: #fbbf24;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--border);
+      color: white;
+      border-radius: 0.5rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    select:focus, input[type="text"]:focus {
+      border-color: var(--primary);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      margin-top: 1rem;
+    }
+
+    .btn-submit:hover {
+      opacity: 0.9;
+    }
+
+    .btn-submit:active {
+      transform: scale(0.98);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+      .container {
+        padding: 1.5rem;
+      }
+      .form-group {
+        padding: 1rem;
+      }
+      .star-rating label {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>Assessment Feedback</h1>
+      <p>Please share your experience so we can improve the platform.</p>
+    </div>
+
+    <form id="feedbackForm">
+      
+      <!-- 1. Overall Rating -->
+      <div class="form-group">
+        <label><i class="ri-star-line"></i> Overall Assessment Rating</label>
+        <div class="star-rating">
+          <input type="radio" id="o5" name="overall_rating" value="5" required><label for="o5" class="ri-star-fill"></label>
+          <input type="radio" id="o4" name="overall_rating" value="4"><label for="o4" class="ri-star-fill"></label>
+          <input type="radio" id="o3" name="overall_rating" value="3"><label for="o3" class="ri-star-fill"></label>
+          <input type="radio" id="o2" name="overall_rating" value="2"><label for="o2" class="ri-star-fill"></label>
+          <input type="radio" id="o1" name="overall_rating" value="1"><label for="o1" class="ri-star-fill"></label>
+        </div>
+      </div>
+
+      <!-- 2. Difficulty Rating -->
+      <div class="form-group">
+        <label><i class="ri-bar-chart-line"></i> Assessment Difficulty</label>
+        <div class="star-rating">
+          <input type="radio" id="d5" name="difficulty_rating" value="5" required><label for="d5" class="ri-star-fill"></label>
+          <input type="radio" id="d4" name="difficulty_rating" value="4"><label for="d4" class="ri-star-fill"></label>
+          <input type="radio" id="d3" name="difficulty_rating" value="3"><label for="d3" class="ri-star-fill"></label>
+          <input type="radio" id="d2" name="difficulty_rating" value="2"><label for="d2" class="ri-star-fill"></label>
+          <input type="radio" id="d1" name="difficulty_rating" value="1"><label for="d1" class="ri-star-fill"></label>
+        </div>
+      </div>
+
+      <!-- 3. Clarity Rating -->
+      <div class="form-group">
+        <label><i class="ri-lightbulb-line"></i> Question Clarity</label>
+        <div class="star-rating">
+          <input type="radio" id="c5" name="clarity_rating" value="5" required><label for="c5" class="ri-star-fill"></label>
+          <input type="radio" id="c4" name="clarity_rating" value="4"><label for="c4" class="ri-star-fill"></label>
+          <input type="radio" id="c3" name="clarity_rating" value="3"><label for="c3" class="ri-star-fill"></label>
+          <input type="radio" id="c2" name="clarity_rating" value="2"><label for="c2" class="ri-star-fill"></label>
+          <input type="radio" id="c1" name="clarity_rating" value="1"><label for="c1" class="ri-star-fill"></label>
+        </div>
+      </div>
+
+      <!-- 4. Platform Experience -->
+      <div class="form-group">
+        <label><i class="ri-macbook-line"></i> Platform Experience</label>
+        <div class="star-rating">
+          <input type="radio" id="p5" name="platform_experience" value="5" required><label for="p5" class="ri-star-fill"></label>
+          <input type="radio" id="p4" name="platform_experience" value="4"><label for="p4" class="ri-star-fill"></label>
+          <input type="radio" id="p3" name="platform_experience" value="3"><label for="p3" class="ri-star-fill"></label>
+          <input type="radio" id="p2" name="platform_experience" value="2"><label for="p2" class="ri-star-fill"></label>
+          <input type="radio" id="p1" name="platform_experience" value="1"><label for="p1" class="ri-star-fill"></label>
+        </div>
+      </div>
+
+      <!-- 5. Recommendation -->
+      <div class="form-group">
+        <label><i class="ri-thumb-up-line"></i> Recommendation</label>
+        <select name="recommendation" required>
+          <option value="" disabled selected>Select an option</option>
+          <option value="Definitely">Definitely</option>
+          <option value="Maybe">Maybe</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <!-- 6. Preferred Type -->
+      <div class="form-group">
+        <label><i class="ri-file-list-3-line"></i> Preferred Assessment Type</label>
+        <select name="preferred_type" required>
+          <option value="" disabled selected>Select an option</option>
+          <option value="No Preference">No Preference</option>
+          <option value="Coding">Coding</option>
+          <option value="Objective">Objective</option>
+        </select>
+      </div>
+
+      <!-- 7. Platform Issues -->
+      <div class="form-group">
+        <label><i class="ri-error-warning-line"></i> Platform Issues</label>
+        <select name="platform_issues" required>
+          <option value="" disabled selected>Select an option</option>
+          <option value="None">None</option>
+          <option value="Lag">Lag / Slow loading</option>
+          <option value="Crash">Platform Crashed</option>
+          <option value="UI Bug">UI Bug / Glitch</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-submit">Submit Feedback</button>
+
+    </form>
+
+    <div id="successMessage" style="display: none; text-align: center; padding: 2rem 0;">
+      <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(16, 185, 129, 0.1); color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin: 0 auto 1.5rem;">
+        <i class="ri-check-line"></i>
+      </div>
+      <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #f8fafc;">Feedback Recorded</h2>
+      <p style="color: #94a3b8; margin-bottom: 2rem;">Thank you! Your feedback has been recorded successfully.</p>
+      <button class="btn-submit" onclick="window.location.href='assessment.html'" style="max-width: 200px; margin: 0 auto;">Return to Dashboard</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const assessmentId = urlParams.get('id');
+      const studentEmail = localStorage.getItem('userEmail');
+
+      if (!assessmentId || !studentEmail) {
+        alert("Missing assessment info or you are not logged in.");
+        return;
+      }
+
+      const formData = new FormData(e.target);
+      const data = {
+        assessment_id: assessmentId,
+        student_email: studentEmail,
+        overall_rating: formData.get('overall_rating'),
+        difficulty_rating: formData.get('difficulty_rating'),
+        clarity_rating: formData.get('clarity_rating'),
+        platform_experience: formData.get('platform_experience'),
+        recommendation: formData.get('recommendation'),
+        preferred_type: formData.get('preferred_type'),
+        platform_issues: formData.get('platform_issues')
+      };
+
+      try {
+        const res = await fetch("http://localhost:3000/submit-feedback", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        
+        if (result.success) {
+          document.getElementById('feedbackForm').style.display = 'none';
+          document.getElementById('successMessage').style.display = 'block';
+          document.querySelector('.header').style.display = 'none';
+        } else {
+          alert("Failed to submit feedback.");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Server error.");
+      }
+    });
+  </script>
+</body>
+</html>

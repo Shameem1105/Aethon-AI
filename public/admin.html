@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aethon Admin - Overview</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin-agent.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <i class="ri-flashlight-line logo-icon"></i>
+      <span class="logo-text">Aethon Admin</span>
+    </div>
+    
+    <nav class="sidebar-menu">
+      <a href="admin.html" class="menu-item active">
+        <i class="ri-dashboard-line"></i> Overview
+      </a>
+      <a href="admin-students.html" class="menu-item">
+        <i class="ri-group-line"></i> Students
+      </a>
+      <a href="admin-assessments.html" class="menu-item">
+        <i class="ri-shield-line"></i> Assessments
+      </a>
+      <a href="admin-monitoring.html" class="menu-item">
+        <i class="ri-computer-line"></i> Monitoring
+      </a>
+      <a href="admin-violations.html" class="menu-item">
+        <i class="ri-error-warning-line"></i> Violations
+      </a>
+      
+      <span class="menu-label">AI Agent</span>
+      
+      <a href="#" class="menu-item" onclick="openAgent(); return false;" style="color: #c084fc;">
+        <i class="ri-sparkling-fill" style="color: #c084fc;"></i> Aethon Intelligence
+      </a>
+      
+      <span class="menu-label">System</span>
+      
+      <a href="admin-settings.html" class="menu-item">
+        <i class="ri-settings-4-line"></i> Settings
+      </a>
+    </nav>
+    
+    <div class="sidebar-profile">
+      <!-- Injected by admin-common.js -->
+    </div>
+  </aside>
+
+  <!-- MAIN VIEWPORT -->
+  <div class="main-content">
+    
+    <!-- TOP HEADER -->
+    <header class="top-header">
+      <div class="breadcrumb">
+        <span>Aethon Platform</span>
+        <i class="ri-arrow-right-s-line"></i>
+        <span class="env-name">Admin Overview</span>
+      </div>
+      
+      <div class="header-actions">
+        <div class="pill-toggle">
+          <a href="dashboard.html" class="toggle-btn">Student View</a>
+          <a href="assessment.html" class="toggle-btn">Assessments</a>
+        </div>
+        
+        <div class="header-search">
+          <i class="ri-search-line"></i>
+          <input type="text" placeholder="Search students, assessments...">
+        </div>
+        
+        <button class="bell-btn">
+          <i class="ri-notification-3-line"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- CONTENT CONTAINER -->
+    <div class="page-container">
+      
+      <div class="page-title-block">
+        <h1 class="page-title">Overview Dashboard</h1>
+        <p class="page-subtitle">Live platform statistics, student activity, and security monitoring.</p>
+      </div>
+
+      <!-- TOP METRICS ROW -->
+      <!-- <div class="metrics-row">
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span>Total Students</span>
+            <i class="ri-group-line"></i>
+          </div>
+          <div class="metric-value" id="stat-total-students">—</div>
+          <div class="metric-footer">
+            <span class="trend-up">Registered</span>
+            <span>on the platform</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span>Total Assessments</span>
+            <i class="ri-file-list-3-line"></i>
+          </div>
+          <div class="metric-value" id="stat-active-tests">—</div>
+          <div class="metric-footer">
+            <span class="trend-up" id="stat-practice-sets">—</span>
+            <span>practice sets also</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span>Total Questions</span>
+            <i class="ri-question-line"></i>
+          </div>
+          <div class="metric-value" id="stat-questions">—</div>
+          <div class="metric-footer">
+            <span class="trend-up">Across</span>
+            <span>all assessments</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span>Security Flags</span>
+            <i class="ri-error-warning-line"></i>
+          </div>
+          <div class="metric-value" id="stat-flags">—</div>
+          <div class="metric-footer">
+            <span style="color: var(--danger); font-weight: 600;">Total violations</span>
+            <span>recorded</span>
+          </div>
+        </div>
+
+      </div> -->
+
+      <!-- SECONDARY METRICS ROW -->
+      <!-- <div class="metrics-row" style="margin-top: 16px;">
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span>Submissions</span>
+            <i class="ri-send-plane-line"></i>
+          </div>
+          <div class="metric-value" id="stat-submissions">—</div>
+          <div class="metric-footer">
+            <span class="trend-up">Students</span>
+            <span>who submitted</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span>Average Score</span>
+            <i class="ri-bar-chart-line"></i>
+          </div>
+          <div class="metric-value" id="stat-avg-score">—</div>
+          <div class="metric-footer">
+            <span class="trend-up">Out of</span>
+            <span>total marks</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span>Feedback Given</span>
+            <i class="ri-chat-check-line"></i>
+          </div>
+          <div class="metric-value" id="stat-feedback">—</div>
+          <div class="metric-footer">
+            <span class="trend-up">Responses</span>
+            <span>collected</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span>Practice Sets</span>
+            <i class="ri-code-s-slash-line"></i>
+          </div>
+          <div class="metric-value" id="stat-practices">—</div>
+          <div class="metric-footer">
+            <span class="trend-up">Available</span>
+            <span>for students</span>
+          </div>
+        </div>
+
+      </div> -->
+
+      <!-- QUICK LINKS SECTION -->
+      <div class="charts-grid" style="margin-top: 24px;">
+        <div class="chart-card">
+          <div class="chart-title-block">
+            <h3 class="chart-title">Quick Actions</h3>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 12px; padding: 8px 0;">
+            <a href="admin-assessments.html" style="display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: rgba(139,92,246,0.08); border: 1px solid rgba(139,92,246,0.2); border-radius: 12px; text-decoration: none; color: inherit; transition: background 0.2s;">
+              <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(139,92,246,0.2); display: flex; align-items: center; justify-content: center; flex-shrink:0;">
+                <i class="ri-shield-line" style="color: #a78bfa; font-size: 18px;"></i>
+              </div>
+              <div>
+                <div style="font-weight: 700; font-size: 14px;">Manage Assessments</div>
+                <div style="font-size: 12px; color: var(--gray-text); margin-top: 2px;">Create, edit, and monitor tests</div>
+              </div>
+              <i class="ri-arrow-right-line" style="margin-left: auto; color: var(--gray-text);"></i>
+            </a>
+            <a href="admin-students.html" style="display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); border-radius: 12px; text-decoration: none; color: inherit; transition: background 0.2s;">
+              <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(16,185,129,0.2); display: flex; align-items: center; justify-content: center; flex-shrink:0;">
+                <i class="ri-group-line" style="color: #34d399; font-size: 18px;"></i>
+              </div>
+              <div>
+                <div style="font-weight: 700; font-size: 14px;">Student Directory</div>
+                <div style="font-size: 12px; color: var(--gray-text); margin-top: 2px;">View scores, violations, profiles</div>
+              </div>
+              <i class="ri-arrow-right-line" style="margin-left: auto; color: var(--gray-text);"></i>
+            </a>
+            <a href="admin-violations.html" style="display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 12px; text-decoration: none; color: inherit; transition: background 0.2s;">
+              <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(239,68,68,0.2); display: flex; align-items: center; justify-content: center; flex-shrink:0;">
+                <i class="ri-error-warning-line" style="color: #f87171; font-size: 18px;"></i>
+              </div>
+              <div>
+                <div style="font-weight: 700; font-size: 14px;">Security Violations</div>
+                <div style="font-size: 12px; color: var(--gray-text); margin-top: 2px;">Review tab switches and proctoring flags</div>
+              </div>
+              <i class="ri-arrow-right-line" style="margin-left: auto; color: var(--gray-text);"></i>
+            </a>
+            <a href="admin-monitoring.html" style="display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2); border-radius: 12px; text-decoration: none; color: inherit; transition: background 0.2s;">
+              <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(59,130,246,0.2); display: flex; align-items: center; justify-content: center; flex-shrink:0;">
+                <i class="ri-computer-line" style="color: #60a5fa; font-size: 18px;"></i>
+              </div>
+              <div>
+                <div style="font-weight: 700; font-size: 14px;">Live Monitoring</div>
+                <div style="font-size: 12px; color: var(--gray-text); margin-top: 2px;">Watch active proctored sessions</div>
+              </div>
+              <i class="ri-arrow-right-line" style="margin-left: auto; color: var(--gray-text);"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Platform Summary Panel -->
+        <div class="chart-card">
+          <div class="chart-title-block">
+            <h3 class="chart-title">Platform Summary</h3>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0; padding: 4px 0;">
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <div style="display: flex; align-items: center; gap: 10px; color: var(--gray-text); font-size: 13px;">
+                <i class="ri-file-list-3-line" style="color: #a78bfa;"></i>
+                Strict Tests Created
+              </div>
+              <span id="summary-tests" style="font-weight: 700; font-size: 15px;">—</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <div style="display: flex; align-items: center; gap: 10px; color: var(--gray-text); font-size: 13px;">
+                <i class="ri-code-s-slash-line" style="color: #34d399;"></i>
+                Practice Sets
+              </div>
+              <span id="summary-practices" style="font-weight: 700; font-size: 15px;">—</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <div style="display: flex; align-items: center; gap: 10px; color: var(--gray-text); font-size: 13px;">
+                <i class="ri-group-line" style="color: #60a5fa;"></i>
+                Registered Students
+              </div>
+              <span id="summary-students" style="font-weight: 700; font-size: 15px;">—</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <div style="display: flex; align-items: center; gap: 10px; color: var(--gray-text); font-size: 13px;">
+                <i class="ri-question-line" style="color: #f59e0b;"></i>
+                Questions in Bank
+              </div>
+              <span id="summary-questions" style="font-weight: 700; font-size: 15px;">—</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <div style="display: flex; align-items: center; gap: 10px; color: var(--gray-text); font-size: 13px;">
+                <i class="ri-send-plane-line" style="color: #34d399;"></i>
+                Total Submissions
+              </div>
+              <span id="summary-submissions" style="font-weight: 700; font-size: 15px;">—</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <div style="display: flex; align-items: center; gap: 10px; color: var(--gray-text); font-size: 13px;">
+                <i class="ri-bar-chart-line" style="color: #a78bfa;"></i>
+                Platform Avg Score
+              </div>
+              <span id="summary-avg" style="font-weight: 700; font-size: 15px;">—</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0;">
+              <div style="display: flex; align-items: center; gap: 10px; color: var(--gray-text); font-size: 13px;">
+                <i class="ri-error-warning-line" style="color: #f87171;"></i>
+                Security Events
+              </div>
+              <span id="summary-flags" style="font-weight: 700; font-size: 15px; color: #f87171;">—</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- RECENT SECURITY EVENTS -->
+      <div class="panel-card" style="margin-top: 24px;">
+        <div class="panel-header">
+          <h2 style="font-size: 18px; font-weight: 700;">Recent Security Events</h2>
+          <a href="admin-violations.html" style="font-size: 13px; color: var(--primary-hover); text-decoration: none; font-weight: 600;">View All <i class="ri-arrow-right-line"></i></a>
+        </div>
+        
+        <div class="table-wrapper">
+          <table class="custom-table" id="recent-violations-table">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Student</th>
+                <th>Email</th>
+                <th>Event Type</th>
+                <th>Severity</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="6" style="text-align: center; color: var(--gray-text); padding: 40px 0;">Loading security alerts feed...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- AETHON INTELLIGENCE FULLSCREEN OVERLAY -->
+  <div id="agent-overlay" class="agent-overlay">
+    <div class="agent-sidebar">
+      <div class="sidebar-header">
+        <h3>Recent Chats</h3>
+        <button onclick="newChat()"><i class="ri-add-line"></i></button>
+      </div>
+      <div id="agent-history-list" class="history-list">
+        <!-- Sessions load here -->
+      </div>
+    </div>
+    
+    <div class="agent-main">
+      <div class="agent-topbar">
+        <div class="agent-brand">
+          <div class="agent-orb"></div>
+          <span>Aethon Intelligence</span>
+        </div>
+        <div class="agent-topbar-actions">
+          <span class="live-badge"><span class="dot"></span> Live</span>
+          <button class="new-chat-btn" onclick="newChat()"><i class="ri-add-line"></i> New chat</button>
+          <button class="close-agent-btn" onclick="closeAgent()"><i class="ri-close-line"></i></button>
+        </div>
+      </div>
+
+      <div id="agent-chat-container" class="agent-chat-container">
+        <!-- Default State -->
+        <div id="agent-welcome" class="agent-welcome">
+          <div class="big-orb"></div>
+          <h2>How can I help you today?</h2>
+          <p>Ask anything about students, assessments, departments, or institutional performance.</p>
+          
+          <div class="agent-greeting-bubble">
+            <div class="agent-orb mini"></div>
+            <div class="greeting-content">
+              <h4>Aethon</h4>
+              <p>Hello! I'm Aethon Intelligence, your AI-powered academic data analyst. I can help you query student records, generate reports, analyze assessment data, and surface actionable insights across your institution.</p>
+            </div>
+          </div>
+
+          <div class="suggested-prompts">
+            <button onclick="sendSuggested('Show students who failed the latest coding assessment')">Show students who failed the latest coding assessment</button>
+            <button onclick="sendSuggested('Find students with security violations')">Find students with security violations</button>
+            <button onclick="sendSuggested('Show performance analytics by department')">Show performance analytics by department</button>
+            <button onclick="sendSuggested('Identify students at academic risk')">Identify students at academic risk</button>
+          </div>
+
+          <button class="manual-toggle-btn" onclick="document.getElementById('prompt-manual').classList.toggle('show')">
+            <i class="ri-book-read-line"></i> View Prompt Manual for Beginners
+          </button>
+          
+          <div id="prompt-manual" class="prompt-manual">
+            <h4><i class="ri-lightbulb-flash-line"></i> How to talk to Aethon Intelligence</h4>
+            <p>You can ask Aethon to fetch, filter, and analyze any data from the platform. Try formats like these:</p>
+            <ul>
+              <li><strong>Counting:</strong> "How many students are registered?" or "How many assessments do we have?"</li>
+              <li><strong>Filtering:</strong> "List all students from [College Name]."</li>
+              <li><strong>Scoring:</strong> "Show me the top 10 students with the highest average scores."</li>
+              <li><strong>Security:</strong> "Find all students who have a 'Critical' severity proctoring violation."</li>
+              <li><strong>Specifics:</strong> "What is the average score for the assessment titled [Assessment Name]?"</li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="agent-messages" class="agent-messages" style="display:none;"></div>
+      </div>
+
+      <div class="agent-input-area">
+        <div class="agent-input-wrapper">
+          <input type="text" id="agent-input" placeholder="Ask Aethon about students, assessments, reports..." onkeypress="handleAgentEnter(event)">
+          <div class="input-actions">
+            <button><i class="ri-mic-line"></i></button>
+            <button class="send-btn" onclick="sendAgentMessage()"><i class="ri-send-plane-2-fill"></i></button>
+          </div>
+        </div>
+        <p class="agent-disclaimer">Aethon Intelligence can make mistakes. Verify important decisions.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="js/admin-common.js"></script>
+  <script src="js/admin-overview.js"></script>
+  <script src="js/admin-agent.js"></script>
+</body>
+</html>

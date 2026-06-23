@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Exam Controls</title>
+
+<link rel="stylesheet" href="css/control.css">
+
+<link
+href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+rel="stylesheet">
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <div class="top">
+    <h1>Exam Security Controls</h1>
+    <p>Manage anti-cheat settings for this test</p>
+  </div>
+
+  <div class="box">
+
+    <input
+      id="assessment_id"
+      class="field"
+      placeholder="Assessment ID">
+
+    <div class="row">
+      <label>Enable Fullscreen</label>
+      <input type="checkbox" id="fullscreen">
+    </div>
+
+    <div class="row">
+      <label>Tab Switch Detection</label>
+      <input type="checkbox" id="tab_switch">
+    </div>
+
+    <div class="row">
+      <label>Hover Detection</label>
+      <input type="checkbox" id="hover_detection">
+    </div>
+
+    <div class="row">
+      <label>Disable Copy Paste</label>
+      <input type="checkbox" id="copy_paste_block">
+    </div>
+
+    <div class="row">
+      <label>Webcam</label>
+      <input type="checkbox" id="webcam">
+    </div>
+
+    <div class="row">
+      <label>Mic</label>
+      <input type="checkbox" id="mic">
+    </div>
+
+    <div class="row">
+      <label>Screen Record</label>
+      <input type="checkbox" id="screen_record">
+    </div>
+
+    <div class="row">
+      <label>Show Result After Submit</label>
+      <input type="checkbox" id="show_result" checked>
+    </div>
+
+    <input
+      id="tab_limit"
+      class="field"
+      type="number"
+      value="3"
+      placeholder="Tab Limit">
+
+    <input
+      id="hover_limit"
+      class="field"
+      type="number"
+      value="3"
+      placeholder="Hover Limit">
+
+    <button class="btn" onclick="saveControls()">
+      Save Controls
+    </button>
+
+    <div id="msg"></div>
+
+  </div>
+
+</div>
+
+<script src="js/control.js"></script>
+</body>
+</html>

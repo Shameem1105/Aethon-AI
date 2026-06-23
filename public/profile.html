@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/profile.css">
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css"
+    rel="stylesheet"
+  >
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+<div class="sidebar" id="sidebar">
+
+  <div class="top">
+
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="ri-book-open-line"></i>
+      </div>
+      <span class="logo-text">AETHON</span>
+    </div>
+
+    <div class="toggle-btn" onclick="toggleSidebar()">
+      <i class="ri-arrow-left-s-line"></i>
+    </div>
+
+  </div>
+
+<div class="menu">
+
+  <button class="menu-item"
+    onclick="window.location.href='dashboard.html'">
+    <i class="ri-layout-grid-line"></i>
+    <span>Dashboard</span>
+  </button>
+
+  <button class="menu-item"
+    onclick="window.location.href='assessment.html'">
+    <i class="ri-pencil-line"></i>
+    <span>Assessments</span>
+  </button>
+
+  <button class="menu-item"
+    onclick="window.location.href='coding.html'">
+    <i class="ri-code-s-slash-line"></i>
+    <span>Coding Practice</span>
+  </button>
+
+  <button class="menu-item active"
+    onclick="window.location.href='profile.html'">
+    <i class="ri-user-fill"></i>
+    <span>Profile</span>
+  </button>
+
+</div>
+
+<div class="profile">
+
+  <div class="profile-left">
+
+    <!-- Avatar -->
+    <div class="avatar" id="userAvatar"></div>
+
+    <!-- Name + Role -->
+    <div class="profile-text">
+      <p class="name" id="userName"></p>
+      <span class="role" id="userRole"></span>
+    </div>
+
+  </div>
+
+  <i class="ri-logout-box-r-line logout"
+     onclick="logout()"
+     style="cursor:pointer;"></i>
+
+</div>
+</div>
+
+
+
+<!-- ================= MAIN ================= -->
+<div class="main">
+
+  <div class="header">
+    <h1 class="title">My Profile</h1>
+  </div>
+
+  <div class="profile-container">
+    <div class="profile-card">
+      <div class="profile-card-avatar" id="pageAvatar">
+        <i class="ri-user-smile-fill"></i>
+      </div>
+      <h1 id="pageName">Loading...</h1>
+      
+      <div class="profile-role-badge" id="pageRole">
+        Loading Role
+      </div>
+
+      <div class="profile-details">
+        
+        <div class="profile-detail-item">
+          <div class="profile-detail-icon"><i class="ri-mail-fill"></i></div>
+          <div class="profile-detail-text">
+            <p>Email Address</p>
+            <h3 id="pageEmailFull">loading@AETHON.com</h3>
+          </div>
+        </div>
+
+        <div class="profile-detail-item">
+          <div class="profile-detail-icon"><i class="ri-phone-fill"></i></div>
+          <div class="profile-detail-text">
+            <p>Phone Number</p>
+            <h3 id="pagePhone">+91 XXXXX XXXXX</h3>
+          </div>
+        </div>
+
+        <div class="profile-detail-item">
+          <div class="profile-detail-icon"><i class="ri-building-4-fill"></i></div>
+          <div class="profile-detail-text">
+            <p>College</p>
+            <h3 id="pageCollege">PSVPEC College</h3>
+          </div>
+        </div>
+
+        <div class="profile-detail-item">
+          <div class="profile-detail-icon"><i class="ri-id-card-fill"></i></div>
+          <div class="profile-detail-text">
+            <p>Roll Number</p>
+            <h3 id="pageRoll">XXXXXXX</h3>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script src="js/nav.js"></script>
+<script src="js/profile.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css"
+    rel="stylesheet"
+  >
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+<div class="sidebar" id="sidebar">
+
+  <div class="top">
+
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="ri-book-open-line"></i>
+      </div>
+      <span class="logo-text">AETHON</span>
+    </div>
+
+    <div class="toggle-btn" onclick="toggleSidebar()">
+      <i class="ri-arrow-left-s-line"></i>
+    </div>
+
+  </div>
+
+<div class="menu">
+
+  <button class="menu-item active"
+    onclick="window.location.href='dashboard.html'">
+    <i class="ri-layout-grid-line"></i>
+    <span>Dashboard</span>
+  </button>
+
+  <button class="menu-item"
+    onclick="window.location.href='assessment.html'">
+    <i class="ri-pencil-line"></i>
+    <span>Assessments</span>
+  </button>
+
+  <button class="menu-item"
+    onclick="window.location.href='coding.html'">
+    <i class="ri-code-s-slash-line"></i>
+    <span>Coding Practice</span>
+  </button>
+
+  <button class="menu-item"
+    onclick="window.location.href='profile.html'">
+    <i class="ri-user-fill"></i>
+    <span>Profile</span>
+  </button>
+
+</div>
+
+<div class="profile">
+
+  <div class="profile-left">
+
+    <!-- Avatar -->
+    <div class="avatar" id="userAvatar"></div>
+
+    <!-- Name + Role -->
+    <div class="profile-text">
+      <p class="name" id="userName"></p>
+      <span class="role" id="userRole"></span>
+    </div>
+
+  </div>
+
+  <i class="ri-logout-box-r-line logout"
+     onclick="logout()"
+     style="cursor:pointer;"></i>
+
+</div>
+</div>
+
+
+
+<!-- ================= MAIN ================= -->
+<div class="main">
+
+  <div class="header">
+    <h1 class="title">Learning Dashboard</h1>
+  </div>
+
+  <!-- CARDS -->
+  <div class="cards">
+
+    <div class="card">
+      <p>Total Assessments</p>
+      <h2 id="total">0</h2>
+
+      <div class="progress">
+        <div class="blue" id="progress1"></div>
+      </div>
+
+      <small id="completedText">0 completed</small>
+    </div>
+
+    <div class="card">
+      <p>Submission Rate</p>
+      <h2 id="submission">0%</h2>
+
+      <div class="progress">
+        <div class="green" id="progress2"></div>
+      </div>
+
+      <small>Target 85%</small>
+    </div>
+
+    <div class="card">
+      <p>Average Score</p>
+      <h2 id="score">0%</h2>
+
+      <div class="progress">
+        <div class="purple" id="progress3"></div>
+      </div>
+
+      <small>Target 80%</small>
+    </div>
+
+  </div>
+
+
+  <!-- CHARTS -->
+  <div class="charts">
+
+    <div class="chart-box">
+      <h3>Monthly Assessment Progress</h3>
+      <canvas id="barChart"></canvas>
+    </div>
+
+    <div class="chart-box" id="recentActivityBox">
+      <h3>Recent Activity</h3>
+      <div class="activity-list" id="activityList">
+        <!-- populated by JS -->
+      </div>
+    </div>
+
+    <div class="chart-box">
+      <h3>Assessment Status</h3>
+      <canvas id="donutChart"></canvas>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="js/nav.js"></script>
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Submitted</title>
+  <link rel="stylesheet" href="css/submitted.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="submit-container">
+    <div class="icon-circle">
+      <i class="ri-check-line"></i>
+    </div>
+    
+    <h1>Test Submitted Successfully!</h1>
+    <p>Your assessment has been recorded and submitted to the instructor. You may now return to your dashboard.</p>
+    
+    <button class="btn" style="margin-bottom: 12px; background: linear-gradient(135deg, #10b981, #059669);" onclick="goToFeedback()">
+      Give Feedback
+    </button>
+    <button class="btn" style="background: rgba(255, 255, 255, 0.1);" onclick="window.location.href='dashboard.html'">
+      Go Back to Dashboard
+    </button>
+  </div>
+
+  <script>
+    function goToFeedback() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const assessmentId = urlParams.get('id');
+      if (assessmentId) {
+        window.location.href = `collect-feedback.html?id=${assessmentId}`;
+      } else {
+        // Fallback if ID is missing (though it shouldn't be in the new flow)
+        window.location.href = `assessment.html`;
+      }
+    }
+  </script>
+
+</body>
+</html>
