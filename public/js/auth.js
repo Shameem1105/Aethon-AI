@@ -19,6 +19,9 @@ async function login(){
     msg.innerText = "Enter email and password";
     return;
   }
+  
+  const urlParams = new URLSearchParams(window.location.search);
+  const requestedRole = urlParams.get('role') || 'student';
 
   try{
 
@@ -29,7 +32,8 @@ async function login(){
       },
       body: JSON.stringify({
         email,
-        password
+        password,
+        role: requestedRole
       })
     });
 

@@ -8,7 +8,7 @@ const adminHtml = fs.readFileSync(path.join(publicDir, 'admin.html'), 'utf8');
 const cssLink = '<link rel="stylesheet" href="css/admin-agent.css">';
 
 // Extract the Sidebar Menu Item
-const sidebarMatch = adminHtml.match(/<span class="menu-label">AI Agent<\/span>[\s\S]*?<\/a>/);
+const sidebarMatch = adminHtml.match(/<span class="menu-label">AI Agent<\/span>[\s\S]*?<a href="admin-prompts\.html"[\s\S]*?<\/a>/);
 const sidebarHTML = sidebarMatch ? sidebarMatch[0] : '';
 
 // Extract the Overlay

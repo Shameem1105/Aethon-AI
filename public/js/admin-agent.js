@@ -23,6 +23,7 @@ function newChat() {
   document.getElementById("agent-messages").style.display = "none";
   document.getElementById("agent-messages").innerHTML = "";
   document.querySelectorAll(".history-item").forEach(el => el.classList.remove("active"));
+  document.querySelector(".agent-main").classList.remove("chat-active");
 }
 
 async function loadAgentSessions() {
@@ -50,6 +51,7 @@ async function loadSessionHistory(sessionId, elem) {
   if (elem) elem.classList.add("active");
 
   document.getElementById("agent-welcome").style.display = "none";
+  document.querySelector(".agent-main").classList.add("chat-active");
   const messagesContainer = document.getElementById("agent-messages");
   messagesContainer.style.display = "flex";
   messagesContainer.innerHTML = "<p style='text-align:center;color:#a1a1aa;'>Loading history...</p>";
@@ -88,6 +90,7 @@ async function sendAgentMessage() {
   input.value = "";
   
   document.getElementById("agent-welcome").style.display = "none";
+  document.querySelector(".agent-main").classList.add("chat-active");
   const messagesContainer = document.getElementById("agent-messages");
   messagesContainer.style.display = "flex";
 
@@ -159,6 +162,12 @@ function appendMessage(role, content, parseHTML = true, id = null) {
 function scrollToBottom() {
   const container = document.getElementById("agent-chat-container");
   container.scrollTop = container.scrollHeight;
+}
+
+function confirmAgentAction(encodedSql) {
+  const input = document.getElementById("agent-input");
+  input.value = "EXECUTE_CONFIRMED_SQL::" + encodedSql;
+  sendAgentMessage();
 }
 
 // EXPORT FUNCTIONS

@@ -20,6 +20,8 @@ function TestPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [flaggedQuestions, setFlaggedQuestions] = useState([]);
   const answersRef = useRef({});
+  const questionsRef = useRef([]);
+  const submittedCodingRef = useRef([]);
   const codingPanelRef = useRef();
 
   // State to track code executions and submitted coding questions
@@ -28,7 +30,9 @@ function TestPage() {
 
   useEffect(() => {
     answersRef.current = answers;
-  }, [answers]);
+    questionsRef.current = questions;
+    submittedCodingRef.current = submittedCodingQuestions;
+  }, [answers, questions, submittedCodingQuestions]);
 
   const toggleFlagQuestion = (qId) => {
     setFlaggedQuestions(prev => 
@@ -56,11 +60,13 @@ function TestPage() {
 
     // Filter out coding answers where the student did not click "Submit Question"
     const finalAnswers = { ...answersRef.current };
-    questions.forEach(q => {
-      if (q.question_type === 'coding' && !submittedCodingQuestions.includes(q.id)) {
+    questionsRef.current.forEach(q => {
+      if (q.question_type === 'coding' && !submittedCodingRef.current.includes(q.id)) {
         delete finalAnswers[q.id];
       }
     });
+
+    const isAutoSubmitted = reason && reason !== "Manual Submission" && reason !== "Manual Exit" ? 1 : 0;
 
     try {
       await fetch("http://localhost:3000/submit-assessment", {
@@ -69,7 +75,8 @@ function TestPage() {
         body: JSON.stringify({
           assessment_id: id,
           student_email: userEmail,
-          answers: finalAnswers
+          answers: finalAnswers,
+          auto_submitted: isAutoSubmitted
         })
       });
     } catch (err) {

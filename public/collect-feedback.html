@@ -23,7 +23,10 @@
     }
     
     body {
-      background-color: var(--bg);
+      background: radial-gradient(circle at top left, #2e1065, transparent 40%),
+                  radial-gradient(circle at bottom right, #1e1b4b, transparent 40%),
+                  #05010a;
+      background-attachment: fixed;
       color: var(--text);
       display: flex;
       justify-content: center;
@@ -33,13 +36,33 @@
     }
 
     .container {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 1rem;
+      background: rgba(15, 10, 25, 0.6);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.5rem;
       padding: 2.5rem;
       width: 100%;
       max-width: 600px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 50px rgba(139, 92, 246, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* Subtle glowing orb inside container */
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at center, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container > * {
+      position: relative;
+      z-index: 1;
     }
 
     .header {
@@ -48,11 +71,13 @@
     }
 
     .header h1 {
-      font-size: 1.8rem;
+      font-size: 2rem;
+      font-weight: 700;
       margin-bottom: 0.5rem;
-      background: linear-gradient(to right, #34d399, #10b981);
+      background: linear-gradient(to right, #a78bfa, #c084fc);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
     }
 
     .header p {
@@ -62,10 +87,17 @@
 
     .form-group {
       margin-bottom: 1.5rem;
-      background: rgba(255, 255, 255, 0.03);
+      background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
       padding: 1.5rem;
-      border-radius: 0.75rem;
-      border: 1px solid var(--border);
+      border-radius: 1rem;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .form-group:hover {
+      transform: translateY(-2px);
+      border-color: rgba(139, 92, 246, 0.3);
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
     }
 
     .form-group label {
@@ -79,7 +111,8 @@
     }
 
     .form-group label i {
-      color: var(--primary);
+      color: #a78bfa;
+      font-size: 1.2rem;
     }
 
     .star-rating {
@@ -101,43 +134,55 @@
       margin: 0;
     }
 
-    .star-rating input:checked ~ label,
-    .star-rating label:hover,
-    .star-rating label:hover ~ label {
+    .star-rating input:checked ~ label {
       color: #fbbf24;
+      text-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
     }
 
     select, input[type="text"] {
       width: 100%;
-      padding: 0.75rem 1rem;
-      background: rgba(0,0,0,0.2);
-      border: 1px solid var(--border);
+      padding: 0.85rem 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       color: white;
-      border-radius: 0.5rem;
+      border-radius: 0.75rem;
       outline: none;
-      transition: border-color 0.2s;
+      transition: all 0.3s;
+      font-size: 0.95rem;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    select option {
+      background-color: #0f172a;
+      color: white;
+      padding: 10px;
     }
 
     select:focus, input[type="text"]:focus {
-      border-color: var(--primary);
+      border-color: #a78bfa;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.2), 0 0 0 3px rgba(139, 92, 246, 0.15);
     }
 
     .btn-submit {
       width: 100%;
-      padding: 1rem;
-      background: linear-gradient(135deg, #10b981, #059669);
+      padding: 1.1rem;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
       color: white;
       border: none;
-      border-radius: 0.5rem;
-      font-size: 1.1rem;
+      border-radius: 0.75rem;
+      font-size: 1.05rem;
       font-weight: 600;
+      letter-spacing: 0.5px;
       cursor: pointer;
-      transition: opacity 0.2s, transform 0.1s;
+      transition: all 0.3s;
       margin-top: 1rem;
+      box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+      text-transform: uppercase;
     }
 
     .btn-submit:hover {
-      opacity: 0.9;
+      box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
+      transform: translateY(-1px);
     }
 
     .btn-submit:active {

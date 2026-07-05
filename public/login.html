@@ -123,8 +123,8 @@ h1{
   </div>
 
   <div id="login-section">
-    <h1>AETHON</h1>
-    <p class="sub">Login to continue</p>
+    <h1 id="login-title">AETHON</h1>
+    <p class="sub" id="login-sub">Login to continue</p>
 
     <div class="field">
       <i class="ri-mail-line"></i>
@@ -179,6 +179,18 @@ h1{
 
 </div>
 
+<script>
+  // Dynamic Title based on Role Parameter
+  const params = new URLSearchParams(window.location.search);
+  const roleParam = params.get('role');
+  if (roleParam === 'admin') {
+    document.getElementById('login-title').innerText = 'AETHON Admin';
+    document.getElementById('login-sub').innerText = 'Login to Admin Dashboard';
+  } else if (roleParam === 'student') {
+    document.getElementById('login-title').innerText = 'AETHON Student';
+    document.getElementById('login-sub').innerText = 'Login to Student Portal';
+  }
+</script>
 <script src="js/auth.js"></script>
 
 </body>
